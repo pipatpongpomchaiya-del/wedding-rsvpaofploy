@@ -479,17 +479,14 @@ async function submitForm() {
   btn.innerHTML = '<span class="spinner"></span> กำลังส่ง...';
   const rsvpMap = { confirm:'🎉 ยินดีไปร่วมงานแน่นอน', decline:'😔 ไม่สะดวกมาร่วมงาน', maybe:'🤔 ยังไม่แน่ใจ' };
   try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        fullname: document.getElementById('fullname').value.trim(),
-        nickname: document.getElementById('nickname').value.trim(),
-        rsvp: rsvpMap[selectedRSVP],
-        guests: document.getElementById('guests').value + ' ท่าน',
-        wishes: document.getElementById('wishes').value.trim()
-      })
+    const params = new URLSearchParams({
+      fullname: document.getElementById('fullname').value.trim(),
+      nickname: document.getElementById('nickname').value.trim(),
+      rsvp: rsvpMap[selectedRSVP],
+      guests: document.getElementById('guests').value + ' ท่าน',
+      wishes: document.getElementById('wishes').value.trim() || '-'
     });
+    await fetch(GOOGLE_SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
     document.getElementById('weddingForm').style.display = 'none';
     document.getElementById('submit-section').style.display = 'none';
     document.getElementById('success-screen').classList.add('visible');
