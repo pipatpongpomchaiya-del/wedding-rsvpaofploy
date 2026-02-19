@@ -43,6 +43,19 @@
     position: relative;
     overflow: hidden;
   }
+  .hero-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: auto;
+    opacity: 0.1;
+    border-radius: 50%;
+    pointer-events: none;
+    object-fit: cover;
+    filter: grayscale(30%);
+  }
   .hero-banner::before {
     content: '';
     position: absolute;
@@ -72,18 +85,18 @@
   }
   .couple-names {
     font-family: 'Mitr', sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     color: var(--coral-accent);
     font-weight: 400;
     line-height: 1.4;
     position: relative;
   }
   .couple-names .ampersand {
-    display: block;
     font-family: 'Great Vibes', cursive;
-    font-size: 34px;
+    font-size: 30px;
     color: var(--peach);
-    margin: -4px 0;
+    margin: 0 6px;
+    display: inline;
   }
   .wedding-details {
     margin-top: 18px;
@@ -276,7 +289,7 @@
   @media (max-width: 680px) {
     body { padding: 10px; }
     .hero-banner { padding: 36px 24px 32px; }
-    .couple-names { font-size: 28px; }
+    .couple-names { font-size: 24px; }
     .section-body { padding: 22px 20px; }
     .title-bar { padding: 22px 20px; }
     .arch-frame, .arch-frame-2 { display: none; }
@@ -309,14 +322,13 @@
 
   <div class="hero-banner">
     <div class="texture"></div>
+    <img src="wedding-photo.jpg" class="hero-watermark" alt="">
     <div class="arch-frame"></div>
     <div class="arch-frame-2"></div>
     <div class="hero-ornament">✦</div>
     <div class="hero-tagline">We're Saying "I Do"</div>
     <div class="couple-names">
-      พัชราภา
-      <span class="ampersand">&</span>
-      พิพัฒพงศ์
+      พัชราภา <span class="ampersand">&</span> พิพัฒพงศ์
     </div>
     <div class="wedding-details">
       <strong>3 พฤษภาคม 2569</strong><br>
@@ -448,7 +460,7 @@
 // ══════════════════════════════════════════════════════
 // ⬇️ ใส่ URL ตรงนี้ (ดูวิธีทำในคู่มือ)
 // ══════════════════════════════════════════════════════
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSQXZ-q9BSZAi55NYWS6eBmn9tfg9tHyu3qdGqIJhWguAU2Kveggw0TXoyclLIJ5BI/exec';
+const GOOGLE_SCRIPT_URL = 'ใส่_URL_ตรงนี้';
 // ══════════════════════════════════════════════════════
 
 let selectedRSVP = '';
