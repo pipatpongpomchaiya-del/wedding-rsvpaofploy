@@ -223,6 +223,38 @@
     content: '▾'; position: absolute; right: 14px; top: 50%;
     transform: translateY(-50%); color: var(--text-light); pointer-events: none;
   }
+
+  /* GUEST BUTTONS */
+  .guest-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .guest-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1.5px solid var(--champagne);
+    background: var(--cream);
+    font-family: 'IBM Plex Sans Thai', 'Prompt', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .guest-btn:hover {
+    border-color: var(--blush);
+    background: var(--blush-pale);
+  }
+  .guest-btn.selected {
+    border-color: var(--peach);
+    background: linear-gradient(135deg, var(--blush-pale), rgba(212,169,154,0.3));
+    color: var(--coral-accent);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(203,142,126,0.2);
+    transform: scale(1.05);
+  }
   .helper-text { font-size: 12.5px; color: var(--text-light); margin-top: 10px; font-weight: 300; font-style: italic; }
 
   /* TEXTAREA */
@@ -395,19 +427,18 @@
         </div>
         <div id="guests-section" style="display:none;">
         <div class="form-group" id="fg-guests">
-          <label class="form-label">จำนวนผู้ติดตาม (รวมตัวท่านเอง) <span class="required">*</span></label>
-          <div class="dropdown-wrapper">
-            <select class="dropdown" id="guests">
-              <option value="" disabled selected>เลือก</option>
-              <option value="1">1 ท่าน</option>
-              <option value="2">2 ท่าน</option>
-              <option value="3">3 ท่าน</option>
-              <option value="4">4 ท่าน</option>
-              <option value="5">5 ท่าน</option>
-            </select>
+          <label class="form-label">มากี่ท่าน? (นับรวมตัวท่านเอง) <span class="required">*</span></label>
+          <div class="form-sublabel">เช่น มาคนเดียว = 1 / มากับแฟน = 2 / มาทั้งครอบครัว = 3-5</div>
+          <div class="guest-buttons">
+            <button type="button" class="guest-btn" onclick="selectGuest(this, '1')">1</button>
+            <button type="button" class="guest-btn" onclick="selectGuest(this, '2')">2</button>
+            <button type="button" class="guest-btn" onclick="selectGuest(this, '3')">3</button>
+            <button type="button" class="guest-btn" onclick="selectGuest(this, '4')">4</button>
+            <button type="button" class="guest-btn" onclick="selectGuest(this, '5')">5</button>
           </div>
-          <div class="helper-text">🪑 เพื่อการจัดสรรที่นั่งที่แม่นยำ</div>
-          <div class="error-msg">กรุณาเลือกจำนวนผู้ติดตาม</div>
+          <input type="hidden" id="guests" value="">
+          <div class="helper-text">🪑 เพื่อจัดเตรียมที่นั่งและอาหารให้เพียงพอ</div>
+          <div class="error-msg">กรุณาเลือกจำนวน</div>
         </div>
         </div>
       </div>
@@ -514,8 +545,10 @@ function resetForm() {
   document.getElementById('guests').value = '';
   selectedRSVP = '';
   document.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.guest-btn').forEach(b => b.classList.remove('selected'));
   document.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
   document.getElementById('wishes-section').classList.remove('visible');
+  document.getElementById('guests-section').style.display = 'none';
 }
 
 function resetAndShowForm() {
@@ -526,9 +559,15 @@ function resetAndShowForm() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function selectGuest(el, value) {
+  document.querySelectorAll('.guest-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('guests').value = value;
+  document.getElementById('fg-guests').classList.remove('error');
+}
+
 document.getElementById('fullname').addEventListener('input', () => document.getElementById('fg-fullname').classList.remove('error'));
 document.getElementById('nickname').addEventListener('input', () => document.getElementById('fg-nickname').classList.remove('error'));
-document.getElementById('guests').addEventListener('change', () => document.getElementById('fg-guests').classList.remove('error'));
 </script>
 </body>
 </html>
