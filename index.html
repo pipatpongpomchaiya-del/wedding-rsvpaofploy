@@ -257,6 +257,70 @@
   }
   .helper-text { font-size: 12.5px; color: var(--text-light); margin-top: 10px; font-weight: 300; font-style: italic; }
 
+  /* TIMELINE */
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(to right, var(--blush), var(--champagne), var(--blush));
+  }
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    position: relative;
+  }
+  .timeline-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--coral-accent);
+    margin-bottom: 6px;
+  }
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blush);
+    border: 2.5px solid white;
+    box-shadow: 0 0 0 2px var(--blush);
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-content { padding: 0 4px; }
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .timeline-desc {
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+  @media (max-width: 480px) {
+    .timeline-title { font-size: 11px; }
+    .timeline-desc { font-size: 11px; }
+    .timeline-time { font-size: 15px; }
+  }
+
   /* TEXTAREA */
   .textarea {
     width: 100%; border: 1.5px solid var(--champagne); border-radius: 10px;
@@ -378,6 +442,42 @@
     <h1>🌸 แบบตอบรับร่วมงานแต่งงาน</h1>
     <p>เราทั้งสองรู้สึกเป็นเกียรติอย่างยิ่งที่จะได้เรียนเชิญท่านมาร่วมเป็นส่วนหนึ่งในวันสำคัญของเรา</p>
     <p class="required-note">* จำเป็นต้องกรอก</p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-card">
+    <div class="section-header blush-header">
+      <h2 class="blush-text">กำหนดการ</h2>
+      <p>วันเสาร์ที่ 3 พฤษภาคม 2569</p>
+    </div>
+    <div class="section-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">09:30</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Welcome & Photo Session</div>
+            <div class="timeline-desc">ถ่ายภาพร่วมกัน 📸</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10:30</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Celebration Ceremony</div>
+            <div class="timeline-desc">พิธีการฉลองมงคลสมรส 💍</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-title">Thank You Lunch</div>
+            <div class="timeline-desc">ร่วมรับประทานอาหาร 🍽️</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <form id="weddingForm" onsubmit="return false;">
