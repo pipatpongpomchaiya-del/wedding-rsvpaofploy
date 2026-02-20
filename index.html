@@ -628,7 +628,7 @@ async function submitForm() {
       fullname: document.getElementById('fullname').value.trim(),
       nickname: document.getElementById('nickname').value.trim(),
       rsvp: rsvpMap[selectedRSVP],
-      guests: document.getElementById('guests').value ? document.getElementById('guests').value + ' ท่าน' : '-',
+      guests: document.getElementById('guests').value || '-',
       wishes: document.getElementById('wishes').value.trim() || '-'
     });
     await fetch(GOOGLE_SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
